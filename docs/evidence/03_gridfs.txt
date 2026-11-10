@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "~/final/final/app/scripts/gridfs_demo.py", line 65, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "~/final/final/app/scripts/gridfs_demo.py", line 39, in main
+    manifest = load_manifest(args.data_dir)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/final/final/app/scripts/gridfs_demo.py", line 27, in load_manifest
+    with open(path, "r", encoding="utf-8") as fh:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '~/final/final/app/data/gridfs_files/files_manifest.txt'

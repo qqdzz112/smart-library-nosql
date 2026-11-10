@@ -1,0 +1,75 @@
+
+================================================================================================
+  数据核对报告
+================================================================================================
+  服务器: MongoDB 7.0.45 | 角色:单机 | 副本集:- | 读取偏好:primaryPreferred
+  目标库: library
+
+--- 1. 集合文档数 -----------------------------------------------
++-------------+------+------+---------------+
+| 集合        | 期望 | 实际 | 结论          |
++-------------+------+------+---------------+
+| books       | 50   | 50   | 通过          |
+| readers     | 30   | 30   | 通过          |
+| borrow_logs | 3000 | 3000 | 通过          |
+| audit_logs  | -    | 2    | 固定集合      |
+| fs.files    | -    | 0    | GridFS 元数据 |
+| fs.chunks   | -    | 0    | GridFS 分块   |
++-------------+------+------+---------------+
+
+--- 2. 字段类型抽查（BSON Date 转换是否正确） -------------------
++-------------------------+-------------+------+
+| 字段                    | Python 类型 | 通过 |
++-------------------------+-------------+------+
+| books.publish_date      | datetime    | 是   |
+| readers.register_date   | datetime    | 是   |
+| borrow_logs.borrow_date | datetime    | 是   |
+| borrow_logs.return_date | datetime    | 是   |
+| books.location          | dict        | 是   |
+| books.tags              | list        | 是   |
++-------------------------+-------------+------+
+
+--- 3. 数据质量 -------------------------------------------------
++--------------------------------+------+
+| 检查项                         | 数量 |
++--------------------------------+------+
+| books.tags 缺失/null           |    4 |
+| books.ebook_name 为 null       |   47 |
+| readers.email 为 null          |    5 |
+| readers.fav_categories 为 null |    2 |
+| borrow_logs.return_date 缺失   |  858 |
+| borrow_logs 已归还             | 2142 |
+| borrow_logs 借出               |  429 |
+| borrow_logs 逾期               |  429 |
++--------------------------------+------+
+
+--- 4. 索引清单 -------------------------------------------------
+  [books] 共 6 个索引
+    - _id_                       [('_id', 1)]
+    - uk_isbn                    [('isbn', 1)]
+    - idx_category_price         [('category', 1), ('price', 1)]
+    - idx_tags                   [('tags', 1)]
+    - idx_publish_date           [('publish_date', -1)]
+    - idx_rating_borrow          [('rating', -1), ('borrow_count', -1)]
+  [readers] 共 4 个索引
+    - _id_                       [('_id', 1)]
+    - uk_card_no                 [('card_no', 1)]
+    - idx_college_level          [('college', 1), ('level', 1)]
+    - idx_name                   [('name', 1)]
+  [borrow_logs] 共 5 个索引
+    - _id_                       [('_id', 1)]
+    - idx_reader_borrowdate      [('reader_card', 1), ('borrow_date', -1)]
+    - idx_book_borrowdate        [('book_isbn', 1), ('borrow_date', -1)]
+    - idx_status_borrowdate      [('status', 1), ('borrow_date', -1)]
+    - idx_borrowdate             [('borrow_date', -1)]
+  [audit_logs] 共 3 个索引
+    - _id_                       [('_id', 1)]
+    - ts_-1                      [('ts', -1)]
+    - action_1_ts_-1             [('action', 1), ('ts', -1)]
+
+--- 5. 文档示例 -------------------------------------------------
+  books: {'isbn': '9787115428028', 'title': 'Python编程：从入门到实践', 'category': '计算机', 'price': 89.0, 'publish_date': datetime.datetime(2023, 2, 28, 16, 0)}
+  location: {'floor': '二楼专业图书区', 'shelf': 'A-07', 'copies': 2}  tags: ['编程', '入门', 'Python']  ebook: ebook_1.pdf
+  readers: {'card_no': 'R20240001', 'name': '张明', 'college': '计算机学院', 'level': '普通', 'email': 'stu01@example.edu'}
+
+数据核对通过。

@@ -1,0 +1,33 @@
+counts 50 30 3000
+book keys: ['author', 'borrow_count', 'category', 'ebook_name', 'isbn', 'location', 'price', 'publish_date', 'publisher', 'rating', 'stock', 'tags', 'title']
+reader keys: ['card_no', 'college', 'email', 'fav_categories', 'level', 'name', 'phone', 'register_date']
+log keys: ['book_isbn', 'borrow_date', 'duration_days', 'reader_card', 'return_date', 'status']
+book types: {'author': ['str'], 'borrow_count': ['int'], 'category': ['str'], 'ebook_name': ['NoneType', 'str'], 'isbn': ['str'], 'location': ['dict'], 'price': ['float'], 'publish_date': ['str'], 'publisher': ['str'], 'rating': ['float'], 'stock': ['int'], 'tags': ['NoneType', 'list'], 'title': ['str']}
+reader types: {'card_no': ['str'], 'college': ['str'], 'email': ['NoneType', 'str'], 'fav_categories': ['NoneType', 'list'], 'level': ['str'], 'name': ['str'], 'phone': ['str'], 'register_date': ['str']}
+log types: {'book_isbn': ['str'], 'borrow_date': ['str'], 'duration_days': ['int'], 'reader_card': ['str'], 'return_date': ['NoneType', 'str'], 'status': ['str']}
+missing tags: 4
+missing ebook_name: 47
+missing email: 5
+missing fav_categories: 2
+categories: [('计算机', 15), ('文学', 12), ('经济管理', 7), ('数学', 6), ('外语', 5), ('历史', 5)]
+colleges: [('计算机学院', 5), ('经济管理学院', 5), ('外国语学院', 4), ('数学与统计学院', 4), ('文学院', 4), ('历史文化学院', 4), ('管理学院', 4)]
+levels: [('普通', 20), ('高级', 5), ('教师', 5)]
+status: [('已归还', 2142), ('借出', 429), ('逾期', 429)]
+missing return_date: 858
+missing duration: 0
+price range: 28.0 198.0
+rating range: 4.0 4.9
+stock sum: 661 borrow_count sum: 6787
+borrow date range: 2023-01-01T00:00:00.000+08:00 2025-12-28T21:53:00.000+08:00
+pubdate range: 1982-11-01T00:00:00.000+08:00 2023-03-01T00:00:00.000+08:00
+distinct isbn in logs: 50 readers in logs: 30
+floors: [('二楼专业图书区', 28), ('一楼中文图书区', 17), ('三楼外文图书区', 5)]
+shelves sample: ['A-02', 'A-03', 'A-04', 'A-05', 'A-07', 'A-08', 'A-09', 'A-12'] ...
+book1: {"isbn": "9787115428028", "title": "Python编程：从入门到实践", "author": "埃里克·马瑟斯", "publisher": "人民邮电出版社", "category": "计算机", "price": 89.0, "stock": 15, "rating": 4.6, "publish_date": "2023-03-01T00:00:00.000+08:00", "borrow_count": 127, "location": {"floor": "二楼专业图书区", "shelf": "A-07", "copies": 2}, "tags": ["编程", "入门", "Python"], "ebook_name": "ebook_1.pdf"}
+reader1: {"card_no": "R20240001", "name": "张明", "college": "计算机学院", "email": "stu01@example.edu", "phone": "13010000000", "level": "普通", "register_date": "2024-01-01T00:00:00.000+08:00", "fav_categories": ["计算机", "经济管理"]}
+log1: {"borrow_date": "2023-01-01T00:00:00.000+08:00", "reader_card": "R20240001", "book_isbn": "9787115428028", "status": "已归还", "duration_days": 15, "return_date": "2023-01-16T10:00:00.000+08:00"}
+log_with_return_sample: [{"borrow_date": "2023-01-01T06:14:00.000+08:00", "reader_card": "R20240023", "book_isbn": "9787532718758", "status": "逾期", "duration_days": 49}]
+dup isbn: []
+dup card: []
+top tags: [('教材', 17), ('文学', 9), ('经典', 9), ('小说', 8), ('进阶', 6), ('数学', 5), ('历史', 5), ('编程', 4), ('入门', 4), ('英语', 4), ('理论', 3), ('畅销', 3)] distinct: 48
+ebook_names: [('ebook_1.pdf', 1), ('ebook_2.pdf', 1), ('ebook_3.pdf', 1)]

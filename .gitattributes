@@ -1,0 +1,8 @@
+# 统一换行：脚本在 Linux 上必须保持 LF
+* text=auto
+*.sh    text eol=lf
+*.js    text eol=lf
+*.py    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf

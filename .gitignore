@@ -1,0 +1,36 @@
+# 本地环境与密钥
+.env
+.env.*
+!.env.example
+keyfile
+*.pem
+deploy/**/keyfile
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+
+# 运行产物
+exports/
+logs/
+*.log
+data/dump/
+tmp/
+_docx_inspect/
+
+# 打包与二进制交付物（体积大，不入库）
+*.zip
+*.docx
+*.pdf
+*.pptx
+screenshots/
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

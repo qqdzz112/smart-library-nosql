@@ -1,0 +1,173 @@
+{
+  "generated_at": "2026-11-10T18:29:20",
+  "repeat": 5,
+  "results": [
+    {
+      "query": "Q1 分类+价格区间",
+      "collection": "books",
+      "index": "idx_category_price",
+      "filter": {
+        "category": "计算机",
+        "price": {
+          "$gte": 50,
+          "$lte": 100
+        }
+      },
+      "before": {
+        "ms_median": 1.597,
+        "ms_min": 1.43,
+        "docs": 50,
+        "keys": 0,
+        "nReturned": 8,
+        "stage": "SORT",
+        "samples": [
+          1.597,
+          1.43,
+          1.523,
+          1.911,
+          1.728
+        ]
+      },
+      "after": {
+        "ms_median": 1.281,
+        "ms_min": 1.169,
+        "docs": 8,
+        "keys": 8,
+        "nReturned": 8,
+        "stage": "LIMIT",
+        "samples": [
+          1.281,
+          1.169,
+          1.267,
+          1.649,
+          1.312
+        ]
+      },
+      "speedup": 1.25,
+      "docs_reduced": 6.25
+    },
+    {
+      "query": "Q2 读者借阅流水（按时间倒序）",
+      "collection": "borrow_logs",
+      "index": "idx_reader_borrowdate",
+      "filter": {
+        "reader_card": "R20240007"
+      },
+      "before": {
+        "ms_median": 3.866,
+        "ms_min": 3.42,
+        "docs": 594,
+        "keys": 594,
+        "nReturned": 20,
+        "stage": "LIMIT",
+        "samples": [
+          3.42,
+          3.866,
+          3.884,
+          3.616,
+          4.078
+        ]
+      },
+      "after": {
+        "ms_median": 1.329,
+        "ms_min": 1.267,
+        "docs": 20,
+        "keys": 20,
+        "nReturned": 20,
+        "stage": "LIMIT",
+        "samples": [
+          1.391,
+          1.267,
+          1.322,
+          1.329,
+          1.425
+        ]
+      },
+      "speedup": 2.91,
+      "docs_reduced": 29.7
+    },
+    {
+      "query": "Q3 状态过滤（已归还，按借阅时间倒序取 20 条）",
+      "collection": "borrow_logs",
+      "index": "idx_status_borrowdate",
+      "filter": {
+        "status": "已归还"
+      },
+      "before": {
+        "ms_median": 1.658,
+        "ms_min": 1.283,
+        "docs": 28,
+        "keys": 28,
+        "nReturned": 20,
+        "stage": "LIMIT",
+        "samples": [
+          2.039,
+          1.87,
+          1.386,
+          1.283,
+          1.658
+        ]
+      },
+      "after": {
+        "ms_median": 2.014,
+        "ms_min": 1.615,
+        "docs": 20,
+        "keys": 20,
+        "nReturned": 20,
+        "stage": "LIMIT",
+        "samples": [
+          3.048,
+          2.387,
+          1.996,
+          2.014,
+          1.615
+        ]
+      },
+      "speedup": 0.82,
+      "docs_reduced": 1.4
+    },
+    {
+      "query": "Q4 借阅日期区间（2024 上半年）",
+      "collection": "borrow_logs",
+      "index": "idx_borrowdate",
+      "filter": {
+        "borrow_date": {
+          "$gte": "2024-01-01 00:00:00+00:00",
+          "$lt": "2024-07-01 00:00:00+00:00"
+        }
+      },
+      "before": {
+        "ms_median": 5.365,
+        "ms_min": 5.192,
+        "docs": 3000,
+        "keys": 0,
+        "nReturned": 50,
+        "stage": "SORT",
+        "samples": [
+          5.803,
+          5.365,
+          5.226,
+          5.409,
+          5.192
+        ]
+      },
+      "after": {
+        "ms_median": 1.726,
+        "ms_min": 1.591,
+        "docs": 50,
+        "keys": 50,
+        "nReturned": 50,
+        "stage": "LIMIT",
+        "samples": [
+          1.746,
+          1.892,
+          1.681,
+          1.591,
+          1.726
+        ]
+      },
+      "speedup": 3.11,
+      "docs_reduced": 60.0
+    }
+  ]
+}
